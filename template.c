@@ -1,8 +1,3 @@
-# Basic Programmes for better understanding of Data Structures and Algorithms
-
-## Template for CP
-
-```c
 #include <stdio.h>
 
 /* Impement as testcase{ body for each testcase} */
@@ -12,11 +7,9 @@
   for (long long i = 0; i < t; \i++)
 
 /* 10^9 + 7 - Most Commonly Used Value */
-
 #define MOD 1000000007
 
 /* I/O Methods */
-
 #define rd(t) scanf("%d", &t)      // int
 #define rld(t) scanf("%ld", &t)    // long
 #define rlld(t) scanf("%lld", &t)  // long long
@@ -116,4 +109,3 @@ ll invMod(ll a, ll mod) {
     return ((x + mod) % mod);
   }
 }
-```
