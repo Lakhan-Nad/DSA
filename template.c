@@ -4,7 +4,7 @@
 #define testcase     \
   long long t;       \
   scanf("%lld", &t); \
-  for (long long i = 0; i < t; \i++)
+  for (long long i = 0; i < t; i++)
 
 /* 10^9 + 7 - Most Commonly Used Value */
 #define MOD 1000000007
@@ -40,9 +40,9 @@ ll fastExp(ll a, ll b, ll mod = 1e17) {
   while (b > 0) {
     if (b & 1) {
       result *= a;
-      result /= mod;
+      result %= mod;
     }
-    a = a * a;
+    a = (a * a)%mod;
     b /= 2;
   }
   return result;
