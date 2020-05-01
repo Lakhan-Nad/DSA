@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define SUCCESS 1;
+#define SUCCESS 1
 #define STACK_OVERFLOW -1
 #define STACK_UNDERFLOW -2
 #define STACK_UNINITIALZED 0
@@ -12,7 +12,7 @@ typedef struct stack {
   int top;
 } stack;
 
-void initialize(stack *s) {
+int initialize(stack *s) {
   if (s == NULL) {
     return STACK_UNINITIALZED;
   }
@@ -61,7 +61,4 @@ int top(stack *s) {
   }
 }
 
-void main() {
-  stack s;
-  ini
-}
+void main() { stack s; }
