@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void swapNumbers(int *a, int *b) {
+void swap(int *a, int *b) {
   int temp;
   temp = *a;
   *a = *b;
