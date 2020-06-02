@@ -10,25 +10,26 @@
 
 #define pisanoPeriodTen 60
 
-int lastDigitOfSumMToN(long long m, long long n) {
+int sumLastDigitsMtoN(long long m, long long n) {
   int arr[pisanoPeriodTen];
-  arr[0] = 1;  // first term
+  arr[0] = 0;  // first term
   arr[1] = 1;  // second term
   // Calculate the Series upto Pisano Period
   for (int i = 2; i < pisanoPeriodTen; i++) {
     arr[i] = (arr[i - 1] + arr[i - 2]) % 10;
   }
-  int left = (m + 1) % (long long)pisanoPeriodTen;
-  if (left == 0) left = pisanoPeriodTen;
-  int right = (n + 2) % (long long)pisanoPeriodTen;
-  if (right == 0) right = pisanoPeriodTen;
-  int lastDigit = (10 + arr[right - 1] - arr[left - 1]) % 10;
+  for (int i = 1; i < pisanoPeriodTen; i++) {
+    arr[i] = (arr[i - 1] + arr[i]) % 10;
+  }
+  int left = (m - 1 > 0 ? m - 1 : 0) % (long long)pisanoPeriodTen;
+  int right = n % (long long)pisanoPeriodTen;
+  int lastDigit = (10 + arr[right] - arr[left]) % 10;
   return lastDigit;
 }
 
 void main() {
-  long long n;
-  scanf("%lld", &n);
-  int result = sumLastDigits(n);
+  long long m, n;
+  scanf("%lld %lld", &m, &n);
+  int result = sumLastDigitsMtoN(m, n);
   printf("%d", result);
 }

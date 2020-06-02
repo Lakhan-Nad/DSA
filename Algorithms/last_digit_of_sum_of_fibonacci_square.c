@@ -10,27 +10,25 @@
 
 #define pisanoPeriodTen 60
 
-int lastDigitOfSum(long long n) {
+int squareFibonacciLastDigit(long long n) {
   int arr[pisanoPeriodTen];
-  arr[0] = 1;  // first term
+  arr[0] = 0;  // first term
   arr[1] = 1;  // second term
   // Calculate the Series upto Pisano Period
   for (int i = 2; i < pisanoPeriodTen; i++) {
     arr[i] = (arr[i - 1] + arr[i - 2]) % 10;
   }
-  int lastDigit = 1;
-  int index = n % (long long)pisanoPeriodTen;
-  if (index == 0) index = pisanoPeriodTen;
-  lastDigit *= arr[index - 1];  // Multiply Fn
-  index = index % pisanoPeriodTen;
-  lastDigit *= arr[index];  // Multiply Fn+1
-  lastDigit = lastDigit % 10;
-  return lastDigit;
+  for (int i = 1; i < pisanoPeriodTen; i++) {
+    arr[i] = (arr[i - 1] + arr[i]) % 10;
+  }
+  int index = (n + 1) % (long long)pisanoPeriodTen;
+  int index2 = n % (long long)pisanoPeriodTen;
+  return (index * index2) % 10;
 }
 
 void main() {
   long long n;
   scanf("%lld", &n);
-  int result = sumLastDigits(n);
+  int result = squareFibonacciLastDigit(n);
   printf("%d", result);
 }

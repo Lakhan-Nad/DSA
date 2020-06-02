@@ -1,15 +1,15 @@
 #include <stdio.h>
 
-int lastDigitFibonacci(int n) {
-  if (n == 1)
+long long lastDigitFibonacci(long long n) {
+  if (n == 0)
     return 0;
-  else if (n == 2)
+  else if (n == 1)
     return 1;
   else {
-    int a = 0;
-    int b = 1;
-    int c;
-    for (int i = 2; i <= n; i++) {
+    long long a = 0;
+    long long b = 1;
+    long long c;
+    for (long long i = 2; i <= n; i++) {
       c = (a + b) % 10;
       a = b;
       b = c;
@@ -19,8 +19,8 @@ int lastDigitFibonacci(int n) {
 }
 
 void main() {
-  int n;
-  scanf("%d", &n);
-  int result = lastDigitFibonacci(n);
-  printf("%d", result);
+  long long n;
+  scanf("%lld", &n);
+  long long result = lastDigitFibonacci(n);
+  printf("%lld", result);
 }

@@ -31,11 +31,11 @@
 
 #include <stdio.h>
 
-int pisanoPeriod(int n) {
-  int a = 0;
-  int b = 1;
-  int c;
-  int i = 2;
+long long pisanoPeriod(long long n) {
+  long long a = 0;
+  long long b = 1;
+  long long c;
+  long long i;
   for (i = 3; i < n * n; i++) {
     c = (a + b) % n;
     a = b;
@@ -47,18 +47,18 @@ int pisanoPeriod(int n) {
   return i;
 }
 
-int fibannociModM(long long n, int m) {
+long long fibannociModM(long long n, long long m) {
   if (m <= 0)
     return -1;
   else if (m == 1)
     return 0;
-  int p = pisanoPeriod(m);
-  int z = (int)(n % (long long)p);
-  if (z == 0) return 1;  // Always Pisano Period ends with 1 :)
-  int a = 0;
-  int b = 1;
-  int c;
-  for (int i = 3; i <= z; i++) {
+  long long p = pisanoPeriod(m);
+  long long z = (int)(n % (long long)p);
+  if (z == 0) return 0;  // Always Pisano Period ends with 1 :)
+  long long a = 0;
+  long long b = 1;
+  long long c;
+  for (long long i = 2; i <= z; i++) {
     c = (a + b) % m;
     a = b;
     b = c;
@@ -68,8 +68,8 @@ int fibannociModM(long long n, int m) {
 
 int main() {
   long long n;
-  int m;
-  scanf("%lld %d", &n, &m);
-  int result = fibannociModM(n, m);
-  printf("%d", result);
+  long long m;
+  scanf("%lld %lld", &n, &m);
+  long long result = fibannociModM(n, m);
+  printf("%lld", result);
 }

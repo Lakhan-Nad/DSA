@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 long fibonacci(int n) {
-  if (n == 1)
+  if (n == 0)
     return (long)0;
-  else if (n == 2)
+  else if (n == 1)
     return (long)1;
   else {
     long a = 0;

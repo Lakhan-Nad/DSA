@@ -1,12 +1,12 @@
 #include <stdio.h>
 
-int gcd(int a, int b) {
+long long gcd(long long a, long long b) {
   if (a <= 0 || b <= 0) {
     return -1;
   }
-  int d = a < b ? a : b;
-  int g = a > b ? a : b;
-  int r;
+  long long d = a < b ? a : b;
+  long long g = a > b ? a : b;
+  long long r;
   while (g % d) {
     r = g % d;
     g = d;
@@ -15,15 +15,15 @@ int gcd(int a, int b) {
   return d;
 }
 
-int lcm(int a, int b) {
-  int gcdAB = gcd(a, b);
-  int lcmAB = (a * b) / gcdAB;
+long long lcm(long long a, long long b) {
+  long long gcdAB = gcd(a, b);
+  long long lcmAB = (a * b) / gcdAB;
   return lcmAB;
 }
 
 void main() {
-  int a, b;
-  scanf("%d %d", &a, &b);
-  int result = lcm(a, b);
-  printf("%d", result);
+  long long a, b;
+  scanf("%lld %lld", &a, &b);
+  long long result = lcm(a, b);
+  printf("%lld", result);
 }

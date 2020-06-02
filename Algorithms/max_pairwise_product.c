@@ -26,4 +26,5 @@ void main() {
     }
   }
   long max_product = (long)max1 * (long)max2;
+  printf("%ld", max_product);
 }

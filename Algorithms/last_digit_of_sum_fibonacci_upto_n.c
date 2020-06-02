@@ -10,17 +10,19 @@
 
 #define pisanoPeriodTen 60
 
-int lastDigitOfSum(long long n) {
+int sumLastDigits(long long n) {
   int arr[pisanoPeriodTen];
-  arr[0] = 1;  // first term
+  arr[0] = 0;  // first term
   arr[1] = 1;  // second term
   // Calculate the Series upto Pisano Period
   for (int i = 2; i < pisanoPeriodTen; i++) {
     arr[i] = (arr[i - 1] + arr[i - 2]) % 10;
   }
-  int index = (n + 2) % (long long)pisanoPeriodTen;
-  if (index == 0) index = pisanoPeriodTen;
-  int lastDigit = arr[index - 1] - 1;
+  for (int i = 1; i < pisanoPeriodTen; i++) {
+    arr[i] = (arr[i - 1] + arr[i]) % 10;
+  }
+  long long index = n % (long long)pisanoPeriodTen;
+  int lastDigit = arr[index];
   return lastDigit;
 }
 
