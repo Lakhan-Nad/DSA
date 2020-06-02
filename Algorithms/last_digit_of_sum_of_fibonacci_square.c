@@ -18,12 +18,9 @@ int squareFibonacciLastDigit(long long n) {
   for (int i = 2; i < pisanoPeriodTen; i++) {
     arr[i] = (arr[i - 1] + arr[i - 2]) % 10;
   }
-  for (int i = 1; i < pisanoPeriodTen; i++) {
-    arr[i] = (arr[i - 1] + arr[i]) % 10;
-  }
   int index = (n + 1) % (long long)pisanoPeriodTen;
   int index2 = n % (long long)pisanoPeriodTen;
-  return (index * index2) % 10;
+  return (arr[index] * arr[index2]) % 10;
 }
 
 void main() {
