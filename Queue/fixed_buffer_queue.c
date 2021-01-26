@@ -71,16 +71,37 @@ typedef struct Fixed_Circular_Buffer
     size_t data_size;
 } Fixed_Circular_Buffer;
 
-Fixed_Circular_Buffer *init_circular_buffer(size_t size, size_t recsize)
+Fixed_Circular_Buffer *alloc_circular_buffer()
 {
     Fixed_Circular_Buffer *new_buffer = (Fixed_Circular_Buffer *)malloc(sizeof(Fixed_Circular_Buffer));
     new_buffer->front = 0;
     new_buffer->rear = 0;
     new_buffer->next = NULL;
-    new_buffer->mask = size == 0 ? 0 : size - 1;
-    new_buffer->data_size = recsize;
-    new_buffer->buffer = (char *)malloc(recsize * (new_buffer->mask + 1));
+    new_buffer->mask = 0;
+    new_buffer->data_size = 0;
+    new_buffer->buffer = NULL;
     return new_buffer;
+}
+
+size_t init_circular_buffer(Fixed_Circular_Buffer *this, size_t size, size_t recsize)
+{
+    this->front = 0;
+    this->rear = 0;
+    this->next = NULL;
+    this->mask = size == 0 ? 0 : size - 1;
+    this->data_size = recsize;
+    this->buffer = (char *)malloc(recsize * (this->mask + 1));
+    return recsize * (this->mask + 1);
+}
+
+void copy_circular_buffer(Fixed_Circular_Buffer *this, Fixed_Circular_Buffer *copy)
+{
+    copy->front = this->front;
+    copy->rear = this->rear;
+    copy->mask = this->mask;
+    copy->data_size = this->data_size;
+    copy->next = this->next;
+    copy->buffer = this->buffer;
 }
 
 bool is_circular_buffer_empty(Fixed_Circular_Buffer *this)
@@ -166,17 +187,24 @@ typedef struct Fixed_Buffer_Queue
 void fixed_queue_init(Fixed_Buffer_Queue *this, size_t size, size_t recsize)
 {
     // initialize once
-    this->head = this->tail = init_circular_buffer(size, recsize);
+    this->head = this->tail = alloc_circular_buffer();
+    init_circular_buffer(this->head, size, recsize);
 }
 
 void fixed_queue_in(Fixed_Buffer_Queue *this, void *data)
 {
     if (is_circular_buffer_full(this->tail))
     {
-        this->tail->next = init_circular_buffer(this->tail->mask + 1, this->tail->data_size);
+        this->tail->next = alloc_circular_buffer();
+        init_circular_buffer(this->tail->next, this->tail->mask + 1, this->tail->data_size);
         this->tail = this->tail->next;
     }
     enqueue_circular_buffer(this->tail, data);
+}
+
+size_t is_fixed_queue_empty(Fixed_Buffer_Queue *this)
+{
+    return is_circular_buffer_empty(this->head);
 }
 
 void fixed_queue_out(Fixed_Buffer_Queue *this, void *data_store)
